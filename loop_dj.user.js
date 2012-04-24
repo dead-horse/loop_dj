@@ -118,9 +118,7 @@ withjQuery(function($, window) {
    var e = window.event || e;
     for(var i in room.DJ){
       if(room.DJ[i] && room.DJ[i].user_id === uid) {
-        if (!confirm('你正在DJ中，确定要离开吗？')) {
-          return false;
-        }
+        return '当前正在DJ台';
       }
     }
   }
