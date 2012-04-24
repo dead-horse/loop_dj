@@ -71,7 +71,8 @@ withjQuery(function($, window) {
       }
     }
     if ($('.dj_waiting a').length !== 0) 
-      $('.dj_waiting a').click();
+      socket.emit(PubType.SetDJ,{user_id:uid,nick_name:nick_name,room_id:roomId,code:$.cookie('member_auth')},function(err){
+  		  if(err) {console.log(err);});
   }
   $('.test').click();
   //离开提示
