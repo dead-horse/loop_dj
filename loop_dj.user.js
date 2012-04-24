@@ -72,9 +72,9 @@ withjQuery(function($, window) {
     }
     console.log('still not');
     console.log($('.dj_waiting a'));
-    $('.dj_waiting a') ? $('.dj_waiting a').click() : null;
+    if ($('.dj_waiting a').length !== 0) 
+      $('.dj_waiting a').click();
   }
-  $('#need_dj').click();
   //离开提示
   window.onbeforeunload = function(e) {
    var e = window.event || e;
