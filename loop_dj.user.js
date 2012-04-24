@@ -38,7 +38,7 @@ function withjQuery(callback, safe){
     }, 30);
   }
 }
-withjQuery(function($, window) {
+(function($, window) {
   
   console.log(uid);
   var needDJ = false;
@@ -86,4 +86,4 @@ withjQuery(function($, window) {
       }
     }
   }
-}, true);
+})($, window);
