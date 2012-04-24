@@ -61,9 +61,7 @@ withjQuery(function($, window) {
       clearInterval(timer);
     }
   });
-  $('.dj_waiting a').click(function() {
-    console.log('123');
-  });
+  
   var tryDj = function() {
     console.log('try');
     for(var i in room.DJ){
