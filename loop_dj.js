@@ -7,6 +7,8 @@
 // @include      *://loop.xiami.com/room/*
 // @require      https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js
 // ==/UserScript==
+
+
 function withjQuery(callback, safe){
   if(typeof(jQuery) == "undefined") {
     var script = document.createElement("script");
