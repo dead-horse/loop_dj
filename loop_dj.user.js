@@ -47,7 +47,7 @@ withjQuery(function($, window) {
   var timer = null;
   //开关
   $('<li id="need_dj">抢DJ</li>')
-  .appendTo($('#room_action'))
+  .appendTo($('#nav'))
   .click(function() {
     needDJ = !needDJ;
     var li = $(this);
@@ -63,12 +63,15 @@ withjQuery(function($, window) {
   });
 
   var tryDj = function() {
+    console.log('try');
     for(var i in room.DJ){
       if(room.DJ[i] && room.DJ[i].user_id==uid) {
         $('#need_dj').click();
         return;
       }
     }
+    console.log('still not');
+    console.log($('.dj_waiting a'));
     $('.dj_waiting a') ? $('.dj_waiting a').click() : null;
   }
 
