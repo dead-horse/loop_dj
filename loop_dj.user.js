@@ -80,7 +80,6 @@ withjQuery(function($, window) {
       return cookieValue;
     }
   };
-  console.log(uid);
   var needDJ = false;
   var timer = null;
   //开关
@@ -121,8 +120,10 @@ withjQuery(function($, window) {
    var e = window.event || e;
     for(var i in room.DJ){
       if(room.DJ[i] && room.DJ[i].user_id==uid) {
-        console.log('dj!');
-        e.returnValue = '你正在DJ中，确定要离开吗？'
+        console.log('in DJ');
+        if (!confirm('你正在DJ中，确定要离开吗？')) {
+          return false;
+        }
       }
     }
   }
