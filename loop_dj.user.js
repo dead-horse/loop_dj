@@ -1,4 +1,3 @@
-
 // ==UserScript==  
 // @name         loop DJ
 // @version      0.0.1
@@ -42,7 +41,7 @@ function withjQuery(callback, safe){
   }
 }
 
-withJQuery(function($, window) {
+withjQuery(function($, window) {
   console.log(uid);
   var needDJ = false;
   var timer = null;
