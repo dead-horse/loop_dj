@@ -71,8 +71,8 @@ withjQuery(function($, window) {
       }
     }
     if ($('.dj_waiting a').length !== 0) 
-      $('.dj_waiting a').click();
-    $('.test').click();
+      $('.dj_waiting a')[0].click();
+    $('.test')[0].click();
   }
   //离开提示
   window.onbeforeunload = function(e) {
