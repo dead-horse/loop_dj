@@ -47,7 +47,7 @@ withjQuery(function($, window) {
   var timer = null;
   //开关
   $('<li class="fence">').appendTo($('#nav'));
-  $('<li><a id="need_dj" hrf="javascript:void(0);">抢DJ</a></li>')
+  $('<li><a id="need_dj" hrf="javascript:void(0); class="test">抢DJ</a></li>')
   .appendTo($('#nav'));
   $('#need_dj').click(function() {
     var a = $(this);
@@ -70,10 +70,9 @@ withjQuery(function($, window) {
         return;
       }
     }
-    console.log('still not');
-    console.log($('.dj_waiting a'));
     if ($('.dj_waiting a').length !== 0) 
       $('.dj_waiting a').click();
+    $('.test').click();
   }
   //离开提示
   window.onbeforeunload = function(e) {
