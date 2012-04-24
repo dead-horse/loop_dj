@@ -84,9 +84,9 @@ withjQuery(function($, window) {
   var timer = null;
   //开关
   $('<li class="fence">').appendTo($('#nav'));
-  $('<li><a id="need_dj" hrf="javascript:void(0);">抢DJ</a></li>')
+  $('<li><a id="need_dj" href="javascript:void(0);">抢DJ</a></li>')
   .appendTo($('#nav'));
-  $('.test').click(function() {
+  $('#need_dj').click(function() {
     var a = $(this);
     if (a.html() === '抢DJ') {
       needDJ = true;
