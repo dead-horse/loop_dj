@@ -100,7 +100,6 @@ withjQuery(function($, window) {
   });
   
   var tryDj = function() {
-    console.log('try');
     for(var i in room.DJ){
       if(room.DJ[i] && room.DJ[i].user_id==uid) {
         $('#need_dj').click();
@@ -119,8 +118,7 @@ withjQuery(function($, window) {
   window.onbeforeunload = function(e) {
    var e = window.event || e;
     for(var i in room.DJ){
-      if(room.DJ[i] && room.DJ[i].user_id==uid) {
-        console.log('in DJ');
+      if(room.DJ[i] && room.DJ[i].user_id === uid) {
         if (!confirm('你正在DJ中，确定要离开吗？')) {
           return false;
         }
