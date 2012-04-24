@@ -80,25 +80,37 @@ withjQuery(function($, window) {
       return cookieValue;
     }
   };
-  var needDJ = false;
-  var timer = null;
+  var djTimer = null;
+  var goodTimer = null;
+  var sID = '';
   //开关
   $('<li class="fence">').appendTo($('#nav'));
   $('<li><a id="need_dj" href="javascript:void(0);">抢DJ</a></li>')
   .appendTo($('#nav'));
+  $('<li><a id="auto_good" href="javascript:void(0);">自动摇头</a></li>')
+  .appendTo($('#nav'));
   $('#need_dj').click(function() {
     var a = $(this);
     if (a.html() === '抢DJ') {
-      needDJ = true;
       a.html('停止');
-      timer = setInterval(tryDj, 100);
+      djTimer = setInterval(tryDj, 100);
     } else {
-      needDJ = false;
       a.html('抢DJ');
-      clearInterval(timer);
+      clearInterval(djTimer);
     }
   });
-  
+  $('#auto_good').click(function() {
+    var a = $(this);
+    if (a.html() === '自动摇头') {
+      a.html('停止摇头')
+      autoGood();
+      goodTimer = setInterval(autoGood, 1000 * 60);
+    } else {
+      a.html('自动摇头');
+      clearInterval(goodTimer);
+    }
+  });
+
   var tryDj = function() {
     for(var i in room.DJ){
       if(room.DJ[i] && room.DJ[i].user_id==uid) {
@@ -109,17 +121,16 @@ withjQuery(function($, window) {
     if ($('.dj_waiting a').length !== 0) {
       socket.emit(PubType.SetDJ, {user_id:uid, nick_name:nick_name, room_id:roomId, code:$.cookie('member_auth')},
       function(err){
-    	  if(err) console.log(err);
-    	 });
+        if(err) console.log(err);
+       });
     }
   }
-  //离开提示
-  window.onbeforeunload = function(e) {
-   var e = window.event || e;
-    for(var i in room.DJ){
-      if(room.DJ[i] && room.DJ[i].user_id === uid) {
-        return '当前正在DJ台';
-      }
+
+  var autoGood = function() {
+    if (sound.curSong.sID !== sID) {
+      sID = sound.curSong.sID;
+      room.goodOrBad(1);
     }
-  }
+  } 
+
 }, true);
