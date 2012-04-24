@@ -47,7 +47,7 @@ withjQuery(function($, window) {
   var timer = null;
   //开关
   $('<li class="fence">').appendTo($('#nav'));
-  $('<li><a id="need_dj" hrf="javascript:void(0); class="test">抢DJ</a></li>')
+  $('<li><a id="need_dj" hrf="javascript:void(0);" class="test">抢DJ</a></li>')
   .appendTo($('#nav'));
   $('.test').click(function() {
     var a = $(this);
@@ -73,7 +73,6 @@ withjQuery(function($, window) {
     if ($('.dj_waiting a').length !== 0) 
       $('.dj_waiting a').click();
   }
-  console.log($('.test'));  
   $('.test').click();
   //离开提示
   window.onbeforeunload = function(e) {
