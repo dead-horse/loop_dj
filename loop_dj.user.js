@@ -49,7 +49,7 @@ withjQuery(function($, window) {
   $('<li class="fence">').appendTo($('#nav'));
   $('<li><a id="need_dj" hrf="javascript:void(0); class="test">抢DJ</a></li>')
   .appendTo($('#nav'));
-  $('#need_dj').click(function() {
+  $('.test').click(function() {
     var a = $(this);
     if (a.html() === '抢DJ') {
       needDJ = true;
@@ -73,7 +73,8 @@ withjQuery(function($, window) {
     if ($('.dj_waiting a').length !== 0) 
       $('.dj_waiting a').click();
   }
-    $('.test').click();
+  console.log($('.test'));  
+  $('.test').click();
   //离开提示
   window.onbeforeunload = function(e) {
    var e = window.event || e;
