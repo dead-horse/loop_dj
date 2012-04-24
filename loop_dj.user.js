@@ -48,16 +48,16 @@ withjQuery(function($, window) {
   //开关
   $('<li class="fence">').appendTo($('#nav'));
   $('<li><a id="need_dj">抢DJ</a></li>')
-  .appendTo($('#nav'))
-  .click(function() {
-    var li = $(this);
-    if (li.html() === '抢DJ') {
+  .appendTo($('#nav'));
+  $('#need_dj').click(function() {
+    var a = $(this);
+    if (a.html() === '抢DJ') {
       needDJ = true;
-      li.html('停止');
+      a.html('停止');
       timer = setInterval(tryDj, 100);
     } else {
       needDJ = false;
-      li.html('抢DJ');
+      a.html('抢DJ');
       clearInterval(timer);
     }
   });
