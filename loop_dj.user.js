@@ -46,10 +46,10 @@ withjQuery(function($, window) {
   var needDJ = false;
   var timer = null;
   //开关
-  $('<li id="need_dj">抢DJ</li>')
+  $('<li class="fence">').appendTo($('#nav'));
+  $('<li><a id="need_dj">抢DJ</a></li>')
   .appendTo($('#nav'))
   .click(function() {
-    needDJ = !needDJ;
     var li = $(this);
     if (li.html() === '抢DJ') {
       needDJ = true;
@@ -80,6 +80,7 @@ withjQuery(function($, window) {
    var e = window.event || e;
     for(var i in room.DJ){
       if(room.DJ[i] && room.DJ[i].user_id==uid) {
+        console.log('dj!');
         e.returnValue = '你正在DJ中，确定要离开吗？'
       }
     }
