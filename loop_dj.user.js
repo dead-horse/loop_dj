@@ -133,4 +133,18 @@ withjQuery(function($, window) {
     }
   } 
 
+  window.modifyLoopAvatar = function (id) {
+    $("#div_popup .popup").hide();
+  	if($("#bg_mask").size()<1) $('body').prepend('<div id="bg_mask"></div>');
+  	$("#popup_loopAvatar").empty();
+  	$.post('/loop/loopavatar',{id:id},function(data) {
+      console.log('12345');
+      console.log(data);
+  		$("#popup_loopAvatar").html(data).show();
+  		$('#popup_loopAvatar .close').click(function(){
+  			$("#bg_mask").remove();
+  			$('#popup_loopAvatar').hide();
+  		});
+  	});
+  }
 }, true);
