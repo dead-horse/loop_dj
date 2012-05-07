@@ -80,6 +80,29 @@ withjQuery(function($, window) {
       return cookieValue;
     }
   };
+  //换装
+  var notFreeModify = window.modifyLoopAvatar;
+  var freeModify = function (id) {
+    $("#div_popup .popup").hide();
+    if($("#bg_mask").size()<1) $('body').prepend('<div id="bg_mask"></div>');
+    $("#popup_loopAvatar").empty();
+    $.post('/loop/loopavatar',{id:id},function(data) {
+      var loopValueReg = /<p.*Loop.*<\/p>/g;
+      var buyButtonReg = /<p.*<button>购买<\/button>.*<\/p>/g;
+      var freeButton = '<p><span class="purchased cur_loop_avatar mockFree">免费 点击使用</span></p>';
+      data = data.replace(loopValueReg, freeButton).replace(buyButtonReg, '');
+      $("#popup_loopAvatar").html(data).show();
+      $('.mockFree').click(function() {
+        var avatar = $(this).parent().parent().children('div').children('div').attr('class').slice(7);
+        room.changeAvatar(uid, avatar);
+      });
+      $('#popup_loopAvatar .close').click(function(){
+        $("#bg_mask").remove();
+        $('#popup_loopAvatar').hide();
+      });
+    });
+  }
+
   var djTimer = null;
   var goodTimer = null;
   var sID = '';
@@ -89,11 +112,13 @@ withjQuery(function($, window) {
   .appendTo($('#nav'));
   $('<li><a id="auto_good" href="javascript:void(0);">自动摇头</a></li>')
   .appendTo($('#nav'));
+  $('<li><a id="free_for_all" href="javascript:void(0);">免费换装</a></li>')
+  .appendTo($('#nav'));
   $('#need_dj').click(function() {
     var a = $(this);
     if (a.html() === '抢DJ') {
       a.html('停止');
-      djTimer = setInterval(tryDj, 100);
+      djTimer = setInterval(tryDj, 50);
     } else {
       a.html('抢DJ');
       clearInterval(djTimer);
@@ -110,7 +135,16 @@ withjQuery(function($, window) {
       clearInterval(goodTimer);
     }
   });
-
+  $('#free_for_all').click(function() {
+    var a = $(this);
+    if (a.html() === '免费换装') {
+      a.html('自力更生');
+      window.modifyLoopAvatar = freeModify;
+    } else {
+      a.html('免费换装');
+      window.modifyLoopAvatar = notFreeModify;
+    }
+  })
   var tryDj = function() {
     for(var i in room.DJ){
       if(room.DJ[i] && room.DJ[i].user_id==uid) {
@@ -132,23 +166,4 @@ withjQuery(function($, window) {
       room.goodOrBad(1);
     }
   } 
-  $('.freeMock').click(function() {
-    console.log(this);
-  })
-  window.modifyLoopAvatar = function (id) {
-    $("#div_popup .popup").hide();
-  	if($("#bg_mask").size()<1) $('body').prepend('<div id="bg_mask"></div>');
-  	$("#popup_loopAvatar").empty();
-  	$.post('/loop/loopavatar',{id:id},function(data) {
-      var loopValueReg = /<p.*Loop.*<\/p>/g;
-      var buyButtonReg = /<p.*<button>购买<\/button>.*<\/p>/g;
-      var freeButton = '<p class="mockFree"><span class="purchased cur_loop_avatar">免费 点击使用</span></p>';
-      data = data.replace(loopValueReg, freeButton).replace(buyButtonReg, '');
-  		$("#popup_loopAvatar").html(data).show();
-  		$('#popup_loopAvatar .close').click(function(){
-  			$("#bg_mask").remove();
-  			$('#popup_loopAvatar').hide();
-  		});
-  	});
-  }
 }, true);
