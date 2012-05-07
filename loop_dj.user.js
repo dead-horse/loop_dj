@@ -138,7 +138,10 @@ withjQuery(function($, window) {
   	if($("#bg_mask").size()<1) $('body').prepend('<div id="bg_mask"></div>');
   	$("#popup_loopAvatar").empty();
   	$.post('/loop/loopavatar',{id:id},function(data) {
-      console.log('12345');
+      var loopValueReg = /<p.*loop.*<\/p>/g;
+      var buyButtonReg = /<p.*<button>购买<\/button>.*<\/p>/g;
+      var freeButton = '<p onclick="changeLoopAvatar(this)"><span class="purchased cur_loop_avatar">免费 点击使用</span></p>';
+      data.replace(loopValueReg, freeButton).replace(buyButtonReg, '');
       console.log(data);
   		$("#popup_loopAvatar").html(data).show();
   		$('#popup_loopAvatar .close').click(function(){
