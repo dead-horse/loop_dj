@@ -141,8 +141,7 @@ withjQuery(function($, window) {
       var loopValueReg = /<p.*Loop.*<\/p>/g;
       var buyButtonReg = /<p.*<button>购买<\/button>.*<\/p>/g;
       var freeButton = '<p onclick="changeLoopAvatar(this)"><span class="purchased cur_loop_avatar">免费 点击使用</span></p>';
-      data.replace(loopValueReg, freeButton).replace(buyButtonReg, '');
-      console.log(data);
+      data = data.replace(loopValueReg, freeButton).replace(buyButtonReg, '');
   		$("#popup_loopAvatar").html(data).show();
   		$('#popup_loopAvatar .close').click(function(){
   			$("#bg_mask").remove();
