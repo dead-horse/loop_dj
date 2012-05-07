@@ -132,7 +132,9 @@ withjQuery(function($, window) {
       room.goodOrBad(1);
     }
   } 
-
+  $('.freeMock').click(function() {
+    console.log(this);
+  })
   window.modifyLoopAvatar = function (id) {
     $("#div_popup .popup").hide();
   	if($("#bg_mask").size()<1) $('body').prepend('<div id="bg_mask"></div>');
@@ -140,7 +142,7 @@ withjQuery(function($, window) {
   	$.post('/loop/loopavatar',{id:id},function(data) {
       var loopValueReg = /<p.*Loop.*<\/p>/g;
       var buyButtonReg = /<p.*<button>购买<\/button>.*<\/p>/g;
-      var freeButton = '<p onclick="changeLoopAvatar(this)"><span class="purchased cur_loop_avatar">免费 点击使用</span></p>';
+      var freeButton = '<p class="mockFree"><span class="purchased cur_loop_avatar">免费 点击使用</span></p>';
       data = data.replace(loopValueReg, freeButton).replace(buyButtonReg, '');
   		$("#popup_loopAvatar").html(data).show();
   		$('#popup_loopAvatar .close').click(function(){
